@@ -1,17 +1,17 @@
 @echo off
 
-rem ## join_logo_scp“®ìŠm”F—pƒoƒbƒ`ƒtƒ@ƒCƒ‹
+rem ## join_logo_scpå‹•ä½œç¢ºèªç”¨ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«
 rem ##
-rem ## “s‡‚Ìˆ«‚¢ƒtƒ@ƒCƒ‹–¼‚ÍiTSƒtƒ@ƒCƒ‹‚Ì‚İj‹­§“I‚ÉƒŠƒl[ƒ€‚µ‚ÄÀs‚·‚é
-rem ## iŒ³‚Ìƒtƒ@ƒCƒ‹–¼‚Í"Vƒtƒ@ƒCƒ‹–¼.title_bak.txt"“à‚É‹LÚ‚µ‚Äo—Í‚·‚éj
+rem ## éƒ½åˆã®æ‚ªã„ãƒ•ã‚¡ã‚¤ãƒ«åã¯ï¼ˆTSãƒ•ã‚¡ã‚¤ãƒ«æ™‚ã®ã¿ï¼‰å¼·åˆ¶çš„ã«ãƒªãƒãƒ¼ãƒ ã—ã¦å®Ÿè¡Œã™ã‚‹
+rem ## ï¼ˆå…ƒã®ãƒ•ã‚¡ã‚¤ãƒ«åã¯"æ–°ãƒ•ã‚¡ã‚¤ãƒ«å.title_bak.txt"å†…ã«è¨˜è¼‰ã—ã¦å‡ºåŠ›ã™ã‚‹ï¼‰
 rem ##
-rem ## “ü—ÍF
-rem ##  %1     : AVSƒtƒ@ƒCƒ‹–¼‚Ü‚½‚ÍTSƒtƒ@ƒCƒ‹–¼
-rem ## o—ÍF
-rem ## tsfullname : ƒŠƒl[ƒ€ˆ—Œã‚Ìƒtƒ@ƒCƒ‹–¼
+rem ## å…¥åŠ›ï¼š
+rem ##  %1     : AVSãƒ•ã‚¡ã‚¤ãƒ«åã¾ãŸã¯TSãƒ•ã‚¡ã‚¤ãƒ«å
+rem ## å‡ºåŠ›ï¼š
+rem ## tsfullname : ãƒªãƒãƒ¼ãƒ å‡¦ç†å¾Œã®ãƒ•ã‚¡ã‚¤ãƒ«å
 
 rem ##------------------------------------------------
-rem ## ‰Šúİ’è
+rem ## åˆæœŸè¨­å®š
 rem ##------------------------------------------------
 set BASEDIR=%~dp0
 set BINDIR=%BASEDIR%bin\
@@ -20,46 +20,46 @@ if "%~1" == "" goto end_rename
 
 :start_rename
 rem ##------------------------------------------------
-rem ## “s‡‚Ìˆ«‚¢ƒtƒ@ƒCƒ‹–¼‚Írenameˆ—AŒ³‚Ì–¼‘O‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶
+rem ## éƒ½åˆã®æ‚ªã„ãƒ•ã‚¡ã‚¤ãƒ«åã¯renameå‡¦ç†ã€å…ƒã®åå‰ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
 rem ##------------------------------------------------
 rem ##
-rem ## TSƒtƒ@ƒCƒ‹‚Ì‚İÀs
+rem ## TSãƒ•ã‚¡ã‚¤ãƒ«æ™‚ã®ã¿å®Ÿè¡Œ
 rem ##
 set "tsfullname=%~1"
 if not "%~x1" == ".ts" goto skip_rename
 
 rem ##
-rem ## “Áê•¶š‚ğˆ—‚µ‚ÄAShift-JIS‚Éƒtƒ@ƒCƒ‹–¼‚ğ•ÏŠ·
+rem ## ç‰¹æ®Šæ–‡å­—ã‚’å‡¦ç†ã—ã¦ã€Shift-JISã«ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¤‰æ›
 rem ##
 for /F "usebackq delims=" %%I IN (`cscript //nologo "%BINDIR%func_echo.vbs" "%~n1"`) do set tsname_new=%%~I
 set "tsname_new=%tsname_new:?=%"
 set "tsfullname=%~dp1%tsname_new%%~x1"
 
 rem ##
-rem ## –¼‘O•ÏX‚È‚¯‚ê‚ÎÈ—ª
+rem ## åå‰å¤‰æ›´ãªã‘ã‚Œã°çœç•¥
 rem ##
 if "%tsname_new%" == "%~n1" goto skip_rename
 
 rem ##
-rem ## ƒtƒ@ƒCƒ‹–¼•ÏX
+rem ## ãƒ•ã‚¡ã‚¤ãƒ«åå¤‰æ›´
 rem ##
 move /Y "%~1" "%tsfullname%"
 
 rem ##
-rem ## Œ³ƒtƒ@ƒCƒ‹–¼‚ğ•Û‘¶
+rem ## å…ƒãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä¿å­˜
 rem ##
 cscript //nologo "%BINDIR%func_write_unicode.vbs" "%~dp1%tsname_new%.title_bak.txt" "%~n1"
 
 :skip_rename
 
 rem ##------------------------------------------------
-rem ## ƒoƒbƒ`ƒtƒ@ƒCƒ‹–{‘ÌÀs
+rem ## ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«æœ¬ä½“å®Ÿè¡Œ
 rem ##------------------------------------------------
-rem ##--- Às ---
+rem ##--- å®Ÿè¡Œ ---
 call "%BASEDIR%jlse_bat.bat" "%tsfullname%"
 
 rem ##
-rem ## ŒJ‚è•Ô‚µˆ—
+rem ## ç¹°ã‚Šè¿”ã—å‡¦ç†
 rem ##
 shift
 if not "%~1" == "" goto start_rename

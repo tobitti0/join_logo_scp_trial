@@ -1,27 +1,27 @@
 @echo off
 
 rem ##
-rem ## join_logo_scpŠÈˆÕÀs - avsì¬‚Ü‚Å‚Ì“®ì
-rem ## “ü—ÍF
-rem ##  %1     : avsƒtƒ@ƒCƒ‹–¼‚Ü‚½‚Ítsƒtƒ@ƒCƒ‹–¼
+rem ## join_logo_scpç°¡æ˜“å®Ÿè¡Œ - avsä½œæˆã¾ã§ã®å‹•ä½œ
+rem ## å…¥åŠ›ï¼š
+rem ##  %1     : avsãƒ•ã‚¡ã‚¤ãƒ«åã¾ãŸã¯tsãƒ•ã‚¡ã‚¤ãƒ«å
 rem ##
-rem ## o—ÍF
-rem ##  (ƒtƒ@ƒCƒ‹–¼)%file_avs_in% : avsƒtƒ@ƒCƒ‹
+rem ## å‡ºåŠ›ï¼š
+rem ##  (ãƒ•ã‚¡ã‚¤ãƒ«å)%file_avs_in% : avsãƒ•ã‚¡ã‚¤ãƒ«
 rem ##
-rem ## ŠÂ‹«•Ï”i“ü—ÍjF
-rem ##  file_avs_in  : ì¬‚·‚éavsƒtƒ@ƒCƒ‹–¼
-rem ##  use_tssplit  : tsƒtƒ@ƒCƒ‹“ü—Í‚Ì“®ìw’è
-rem ##  use_intools  : tsƒtƒ@ƒCƒ‹“ü—Í‚Ì“®ìw’è
-rem ##  tffbff       : L-Smash Works‚Éİ’è‚·‚éê‡ATFF‚Ü‚½‚ÍBFF
+rem ## ç’°å¢ƒå¤‰æ•°ï¼ˆå…¥åŠ›ï¼‰ï¼š
+rem ##  file_avs_in  : ä½œæˆã™ã‚‹avsãƒ•ã‚¡ã‚¤ãƒ«å
+rem ##  use_tssplit  : tsãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›æ™‚ã®å‹•ä½œæŒ‡å®š
+rem ##  use_intools  : tsãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›æ™‚ã®å‹•ä½œæŒ‡å®š
+rem ##  tffbff       : L-Smash Worksã«è¨­å®šã™ã‚‹å ´åˆã€TFFã¾ãŸã¯BFF
 rem ##
 
-rem ##--- avs“ü—Í‚Í–‘Oİ’è•s—v ---
+rem ##--- avså…¥åŠ›æ™‚ã¯äº‹å‰è¨­å®šä¸è¦ ---
 if "%~x1" == ".avs" goto label_in_avs
 
 rem ##------------------------------------------------
-rem ## TsSplitterg—p—á
+rem ## TsSplitterä½¿ç”¨ä¾‹
 rem ##------------------------------------------------
-rem ##--- tsƒtƒ@ƒCƒ‹–‘Oˆ—“®ìi—áj ---
+rem ##--- tsãƒ•ã‚¡ã‚¤ãƒ«äº‹å‰å‡¦ç†å‹•ä½œï¼ˆä¾‹ï¼‰ ---
 if "%use_tssplit%" == "1" goto label_tssplitter_1
 if "%use_tssplit%" == "2" goto label_tssplitter_2
 goto skip_tssplitter
@@ -34,28 +34,28 @@ goto skip_tssplitter
   goto skip_tssplitter
 
 :label_tssplitter_2
-  rem •Ê‚ÌØ‚èo‚µ‚ğs‚¤
+  rem åˆ¥ã®åˆ‡ã‚Šå‡ºã—ã‚’è¡Œã†
   goto skip_tssplitter
 
 :skip_tssplitter
 
 rem ##------------------------------------------------
-rem ## DGIndex“™‚ğg—p‚µ‚½“®ì•ªŠò—á
+rem ## DGIndexç­‰ã‚’ä½¿ç”¨ã—ãŸå‹•ä½œåˆ†å²ä¾‹
 rem ##------------------------------------------------
 rem ## 
-rem ## use_intools‚Ìg—p—ái0‚ª’Êíj
+rem ## use_intoolsã®ä½¿ç”¨ä¾‹ï¼ˆ0ãŒé€šå¸¸ï¼‰
 rem ##  0  : L-SMASH Works
 rem ##  1  : dgindex + FAW
 rem ## 10  : L-SMASH Works + ts_parser + FAW
 rem ## 
 
-rem ##---dgindex“®ìŠm”F ---
+rem ##---dgindexå‹•ä½œç¢ºèª ---
 if "%use_intools%" == "1" goto label_dgindex
 
 rem ##------------------------------------------------
-rem ##i’Êí“ü—Íj L-SMASH Works‚Å“ü—Íavsƒtƒ@ƒCƒ‹ì¬
+rem ##ï¼ˆé€šå¸¸å…¥åŠ›ï¼‰ L-SMASH Worksã§å…¥åŠ›avsãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆ
 rem ##------------------------------------------------
-rem ##--- tsƒtƒ@ƒCƒ‹“ü—Í‚Ìavsì¬ ---
+rem ##--- tsãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›æ™‚ã®avsä½œæˆ ---
 :label_in_ts
 set dominance=0
 if "%tffbff%" == "TFF" set dominance=1
@@ -63,17 +63,17 @@ if "%tffbff%" == "BFF" set dominance=2
 >  "%file_avs_in%" echo TSFilePath="%~1"
 >> "%file_avs_in%" echo LWLibavVideoSource(TSFilePath, repeat=true, dominance=%dominance%)
 
-rem ##--- ‰¹º‚ğts_parser‚Åì¬‚·‚éê‡‚ÍˆÚ“® ---
+rem ##--- éŸ³å£°ã‚’ts_parserã§ä½œæˆã™ã‚‹å ´åˆã¯ç§»å‹• ---
 if "%use_intools%" == "10" goto label_tsparser
 
 >> "%file_avs_in%" echo AudioDub(last, LWLibavAudioSource(TSFilePath, stream_index=1, av_sync=true))
 goto label_in_end
 
 rem ##------------------------------------------------
-rem ##i•Êƒc[ƒ‹g—p—ájDGIndex“®ì
+rem ##ï¼ˆåˆ¥ãƒ„ãƒ¼ãƒ«ä½¿ç”¨ä¾‹ï¼‰DGIndexå‹•ä½œ
 rem ##------------------------------------------------
 :label_dgindex
-echo DGIndex‚ğg—p‚µ‚Ü‚·
+echo DGIndexã‚’ä½¿ç”¨ã—ã¾ã™
 set named2v=work_d2v
 set nameinaac1=%named2v%*ms.aac
 set nameinwav1=%named2v%*ms_aac.wav
@@ -86,7 +86,7 @@ call :sublabel_faw
 goto label_in_end
 
 rem ##------------------------------------------------
-rem ##i•Êƒc[ƒ‹g—p—ájts_parser“®ì
+rem ##ï¼ˆåˆ¥ãƒ„ãƒ¼ãƒ«ä½¿ç”¨ä¾‹ï¼‰ts_parserå‹•ä½œ
 rem ##------------------------------------------------
 :label_tsparser
 set nametsp=work_tsp
@@ -99,8 +99,8 @@ call :sublabel_faw
 goto label_in_end
 
 rem ##------------------------------------------------
-rem ## ƒTƒuƒ‹[ƒ`ƒ“
-rem ##i•Êƒc[ƒ‹g—p—ájFAW“®ì
+rem ## ã‚µãƒ–ãƒ«ãƒ¼ãƒãƒ³
+rem ##ï¼ˆåˆ¥ãƒ„ãƒ¼ãƒ«ä½¿ç”¨ä¾‹ï¼‰FAWå‹•ä½œ
 rem ##------------------------------------------------
 :sublabel_faw
 FOR /F "delims=* usebackq" %%t IN (`dir /b "%nameinaac1%"`) DO set nameinaac=%%t
@@ -110,9 +110,9 @@ exit /b
 
 
 rem ##------------------------------------------------
-rem ## “ü—Íavsƒtƒ@ƒCƒ‹ì¬i“ü—Íavsƒtƒ@ƒCƒ‹‚ğƒRƒs[j
+rem ## å…¥åŠ›avsãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆï¼ˆå…¥åŠ›avsãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ï¼‰
 rem ##------------------------------------------------
-rem ##--- avsƒtƒ@ƒCƒ‹“ü—Í‚Íì‹Æ—p‚Ì–¼‘O‚ÅƒRƒs[ ---
+rem ##--- avsãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›æ™‚ã¯ä½œæ¥­ç”¨ã®åå‰ã§ã‚³ãƒ”ãƒ¼ ---
 :label_in_avs
 copy "%~1" "%file_avs_in%"
 

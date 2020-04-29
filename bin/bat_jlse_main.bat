@@ -1,27 +1,27 @@
 @echo off
 
-rem ## join_logo_scpŠÈˆÕÀs - CMƒJƒbƒg“®ì
-rem ## o—ÍF
-rem ##  join_logo_scp‚ÌŒ‹‰Êƒtƒ@ƒCƒ‹
+rem ## join_logo_scpç°¡æ˜“å®Ÿè¡Œ - CMã‚«ãƒƒãƒˆå‹•ä½œ
+rem ## å‡ºåŠ›ï¼š
+rem ##  join_logo_scpã®çµæœãƒ•ã‚¡ã‚¤ãƒ«
 rem ##
-rem ## ŠÂ‹«•Ï”i“ü—ÍjF
-rem ##  BINDIR    : Àsƒtƒ@ƒCƒ‹ƒtƒHƒ‹ƒ_
-rem ##  LOGO_PATH       : ƒƒSƒtƒ@ƒCƒ‹–¼
-rem ##  LOGOSUB_PATH    : CMŒŸo‚Ég‚í‚È‚¢ƒƒSƒtƒ@ƒCƒ‹–¼
-rem ##  JLOGO_CMD_PATH  : join_logo_scp‚ÌÀsƒXƒNƒŠƒvƒg
-rem ##  JLOGO_OPT1      : join_logo_scp‚ÌƒIƒvƒVƒ‡ƒ“1
-rem ##  JLOGO_OPT2      : join_logo_scp‚ÌƒIƒvƒVƒ‡ƒ“2
-rem ##  JL_FLAGS        : join_logo_scp‚Ì-flagsƒIƒvƒVƒ‡ƒ““à—e
-rem ##  OPT_CHAPTER_EXE : chapter_exe‚ÌƒIƒvƒVƒ‡ƒ“
-rem ##  file_avs_in     : “ü—Íavsƒtƒ@ƒCƒ‹–¼
-rem ##  RESTART_AFTER_TRIM : 1‚ÌƒJƒbƒgˆÊ’u‚Íè“®C³Ï‚İ‚Æ‚µ‚ÄÈ—ª
+rem ## ç’°å¢ƒå¤‰æ•°ï¼ˆå…¥åŠ›ï¼‰ï¼š
+rem ##  BINDIR    : å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ«ãƒ€
+rem ##  LOGO_PATH       : ãƒ­ã‚´ãƒ•ã‚¡ã‚¤ãƒ«å
+rem ##  LOGOSUB_PATH    : CMæ¤œå‡ºã«ä½¿ã‚ãªã„ãƒ­ã‚´ãƒ•ã‚¡ã‚¤ãƒ«å
+rem ##  JLOGO_CMD_PATH  : join_logo_scpã®å®Ÿè¡Œã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+rem ##  JLOGO_OPT1      : join_logo_scpã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³1
+rem ##  JLOGO_OPT2      : join_logo_scpã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³2
+rem ##  JL_FLAGS        : join_logo_scpã®-flagsã‚ªãƒ—ã‚·ãƒ§ãƒ³å†…å®¹
+rem ##  OPT_CHAPTER_EXE : chapter_exeã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³
+rem ##  file_avs_in     : å…¥åŠ›avsãƒ•ã‚¡ã‚¤ãƒ«å
+rem ##  RESTART_AFTER_TRIM : 1ã®æ™‚ã‚«ãƒƒãƒˆä½ç½®ã¯æ‰‹å‹•ä¿®æ­£æ¸ˆã¿ã¨ã—ã¦çœç•¥
 rem ##
 
 
 rem ##------------------------------------------------
-rem ## ‰Šúİ’èi•Ê‚ÌŠ‚Å‚Ü‚Æ‚ß‚Äİ’èj
+rem ## åˆæœŸè¨­å®šï¼ˆåˆ¥ã®æ‰€ã§ã¾ã¨ã‚ã¦è¨­å®šï¼‰
 rem ##------------------------------------------------
-rem ##--- ƒtƒ@ƒCƒ‹–¼İ’è ---
+rem ##--- ãƒ•ã‚¡ã‚¤ãƒ«åè¨­å®š ---
 rem set file_avs_in=in_org.avs
 rem set file_avs_logo=obs_logo_erase.avs
 rem set file_avs_cut=obs_cut.avs
@@ -31,25 +31,25 @@ rem set file_txt_logoframe=obs_logoframe.txt
 rem set file_txt_chapterexe=obs_chapterexe.txt
 rem set file_txt_jlscp=obs_jlscp.txt
 
-rem ## "•¶š—ñ"‚Ì•¶š—ñ‚ª\‚ÅI‚í‚é‚Æƒoƒbƒ`ˆ—‚ÅŒã”¼‚Ì"‚ª”F¯‚³‚ê‚È‚¢‚½‚ß‘Îô
+rem ## "æ–‡å­—åˆ—"ã®æ–‡å­—åˆ—ãŒ\ã§çµ‚ã‚ã‚‹ã¨ãƒãƒƒãƒå‡¦ç†ã§å¾ŒåŠã®"ãŒèªè­˜ã•ã‚Œãªã„ãŸã‚å¯¾ç­–
 set DISP_LOGO_PATH=
 if not "%LOGO_PATH%" == "" set "DISP_LOGO_PATH=%LOGO_PATH:\=\\%"
 
 rem ##------------------------------------------------
-rem ## è“®C³—p‚ÌÈ—ªˆ—
+rem ## æ‰‹å‹•ä¿®æ­£æ™‚ç”¨ã®çœç•¥å‡¦ç†
 rem ##------------------------------------------------
 if "%RESTART_AFTER_TRIM%" == "1" goto skip_exe_jls
 
 rem ##------------------------------------------------
-rem ## chapter_exeÀs
+rem ## chapter_exeå®Ÿè¡Œ
 rem ##------------------------------------------------
 "%BINDIR%chapter_exe.exe" -v "lwinput.aui://%file_avs_in%" %OPT_CHAPTER_EXE% -o "%file_txt_chapterexe%"
 if %ERRORLEVEL% neq 0 goto err_chapterexe
 
 rem ##------------------------------------------------
-rem ## logoframeÀs
+rem ## logoframeå®Ÿè¡Œ
 rem ##------------------------------------------------
-rem ## ƒƒSƒf[ƒ^iCMŠm”F—pA–³ŠÖŒW—pj‚ğŠm”F‚µA‰½‚à‚È‚¯‚ê‚ÎÀs‚µ‚È‚¢
+rem ## ãƒ­ã‚´ãƒ‡ãƒ¼ã‚¿ï¼ˆCMç¢ºèªç”¨ã€ç„¡é–¢ä¿‚ç”¨ï¼‰ã‚’ç¢ºèªã—ã€ä½•ã‚‚ãªã‘ã‚Œã°å®Ÿè¡Œã—ãªã„
 set DISP_LOGO_OPT=
 set JL_INLOGO=
 if not "%DISP_LOGO_PATH%" == "" set DISP_LOGO_OPT=-logo "%DISP_LOGO_PATH%"
@@ -64,14 +64,14 @@ set JL_INLOGO=-inlogo "%file_txt_logoframe%"
 :skip_logoframe
 
 rem ##------------------------------------------------
-rem ## join_logo_scpÀs
+rem ## join_logo_scpå®Ÿè¡Œ
 rem ##------------------------------------------------
 "%BINDIR%join_logo_scp.exe" %JL_INLOGO% -inscp "%file_txt_chapterexe%" -incmd "%JLOGO_CMD_PATH%" -o "%file_avs_cut%" -oscp "%file_txt_jlscp%" -flags "%JL_FLAGS%" %JLOGO_OPT1% %JLOGO_OPT2%
 
 :skip_exe_jls
 
 rem ##------------------------------------------------
-rem ## Œ‹‰Êavsƒtƒ@ƒCƒ‹ì¬
+rem ## çµæœavsãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆ
 rem ##------------------------------------------------
 copy "%file_avs_in%" "%file_avs_in_cutcm%"
 >>"%file_avs_in_cutcm%" type "%file_avs_cut%"
@@ -81,28 +81,28 @@ if exist "%file_avs_logo%" >>"%file_avs_in_cutcl%" type "%file_avs_logo%"
 >>"%file_avs_in_cutcl%" type "%file_avs_cut%"
 
 rem ##------------------------------------------------
-rem ## Š®—¹
+rem ## å®Œäº†
 rem ##------------------------------------------------
 exit /b 0
 
 
 rem ##------------------------------------------------
-rem ## ƒGƒ‰[ˆ—
+rem ## ã‚¨ãƒ©ãƒ¼å‡¦ç†
 rem ##------------------------------------------------
 :err_chapterexe
-echo chapter_exe‚ÅƒGƒ‰[”­¶‚Ì‚½‚ßA’†’f‚µ‚Ü‚·B
+echo chapter_exeã§ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿã®ãŸã‚ã€ä¸­æ–­ã—ã¾ã™ã€‚
 goto err_end
 
 :err_logoframe
-echo logoframe‚ÅƒGƒ‰[”­¶‚Ì‚½‚ßA’†’f‚µ‚Ü‚·B
+echo logoframeã§ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿã®ãŸã‚ã€ä¸­æ–­ã—ã¾ã™ã€‚
 goto err_end
 
 :err_join
-echo join_logo_scp‚ÅƒGƒ‰[”­¶‚Ì‚½‚ßA’†’f‚µ‚Ü‚·B
+echo join_logo_scpã§ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿã®ãŸã‚ã€ä¸­æ–­ã—ã¾ã™ã€‚
 goto err_end
 
 rem ##------------------------------------------------
-rem ## ƒGƒ‰[I—¹
+rem ## ã‚¨ãƒ©ãƒ¼çµ‚äº†
 rem ##------------------------------------------------
 :err_end
 exit /b 1

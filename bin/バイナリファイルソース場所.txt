@@ -1,19 +1,19 @@
-�o�C�i�����s�t�@�C���͉��L�ꏊ���炻�̂܂܎����Ă��Ă��܂��B
-�i�ڍׂ̓����N����Q�Ƃ��Ă��������j
+バイナリ実行ファイルは下記場所からそのまま持ってきています。
+（詳細はリンク先を参照してください）
 
-�Echapter_exe�̉�����(mod4)
-�Elogoframe ver1.16
-�Ejoin_logo_scp ver2.1
-�ʃt�H���_�ɓ���
+・chapter_exeの改造版(mod4)
+・logoframe ver1.16
+・join_logo_scp ver2.1
+別フォルダに同梱
 
 
-�EL-SMASH Works r717 (lwinput.aui)
+・L-SMASH Works r717 (lwinput.aui)
 http://pop.4-bit.jp/
 
 
 
 
-�ȉ���L-SMASH Works��LICENSE�ł��B
+以下はL-SMASH WorksのLICENSEです。
 
 L-SMASH_Works_AviUtl-SDK_LICENSE
 ---

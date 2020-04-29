@@ -1,68 +1,68 @@
 rem ## 
-rem ## join_logo_scp“®ìŠm”F—pƒoƒbƒ`ƒtƒ@ƒCƒ‹‚Ìİ’èƒtƒ@ƒCƒ‹
-rem ## “ü—ÍF
-rem ##  %1     : AVSƒtƒ@ƒCƒ‹–¼‚Ü‚½‚ÍTSƒtƒ@ƒCƒ‹–¼
+rem ## join_logo_scpå‹•ä½œç¢ºèªç”¨ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«ã®è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«
+rem ## å…¥åŠ›ï¼š
+rem ##  %1     : AVSãƒ•ã‚¡ã‚¤ãƒ«åã¾ãŸã¯TSãƒ•ã‚¡ã‚¤ãƒ«å
 rem ## 
-rem ## ŠÂ‹«•Ï”i“ü—ÍjF
-rem ##  BASEDIR   : Å‰‚Ìƒoƒbƒ`ƒtƒ@ƒCƒ‹êŠ
+rem ## ç’°å¢ƒå¤‰æ•°ï¼ˆå…¥åŠ›ï¼‰ï¼š
+rem ##  BASEDIR   : æœ€åˆã®ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«å ´æ‰€
 rem ## 
 
 rem ##------------------------------------------------
-rem ## ƒ`ƒƒƒvƒ^[İ’è
+rem ## ãƒãƒ£ãƒ—ã‚¿ãƒ¼è¨­å®š
 rem ##------------------------------------------------
-rem === ƒ`ƒƒƒvƒ^[o—Íæitvtplay—pj‚ğ“ü—Íƒtƒ@ƒCƒ‹‚É‚·‚éê‡Ÿ‚Ìrem‚ğÁ‚· ===
+rem === ãƒãƒ£ãƒ—ã‚¿ãƒ¼å‡ºåŠ›å…ˆï¼ˆtvtplayç”¨ï¼‰ã‚’å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã«ã™ã‚‹å ´åˆæ¬¡ã®remã‚’æ¶ˆã™ ===
 rem set file_chapter_tvtplay=%~dpn1.chapter
 
-rem === ƒ`ƒƒƒvƒ^[o—ÍæiƒJƒbƒg‘Oj‚ğ“ü—Íƒtƒ@ƒCƒ‹‚É‚·‚éê‡Ÿ‚Ìrem‚ğÁ‚· ===
+rem === ãƒãƒ£ãƒ—ã‚¿ãƒ¼å‡ºåŠ›å…ˆï¼ˆã‚«ãƒƒãƒˆå‰ï¼‰ã‚’å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã«ã™ã‚‹å ´åˆæ¬¡ã®remã‚’æ¶ˆã™ ===
 rem set file_chapter_org=%~dpn1.chapter.txt
-rem === ƒ`ƒƒƒvƒ^[o—ÍæiƒJƒbƒgŒãj‚ğ“ü—Íƒtƒ@ƒCƒ‹‚É‚·‚éê‡Ÿ‚Ìrem‚ğÁ‚· ===
+rem === ãƒãƒ£ãƒ—ã‚¿ãƒ¼å‡ºåŠ›å…ˆï¼ˆã‚«ãƒƒãƒˆå¾Œï¼‰ã‚’å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã«ã™ã‚‹å ´åˆæ¬¡ã®remã‚’æ¶ˆã™ ===
 rem set file_chapter_cut=%~dpn1.chapter.txt
 
 rem ##------------------------------------------------
-rem ## TSƒtƒ@ƒCƒ‹w’è‚Ìo—Íæ
-rem ## OUTDIR\OUTNAME\ ‚ÉŒ‹‰Ê‚ªo—Í‚³‚ê‚é
+rem ## TSãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®šæ™‚ã®å‡ºåŠ›å…ˆ
+rem ## OUTDIR\OUTNAME\ ã«çµæœãŒå‡ºåŠ›ã•ã‚Œã‚‹
 rem ##------------------------------------------------
-rem ##--- o—Íİ’è ---
+rem ##--- å‡ºåŠ›è¨­å®š ---
 set OUTDIR=%BASEDIR%result\
 set "OUTNAME=%~n1\"
 
 rem ##------------------------------------------------
-rem ## “ü—Íƒtƒ@ƒCƒ‹‚ÌƒtƒHƒ‹ƒ_İ’è
+rem ## å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚©ãƒ«ãƒ€è¨­å®š
 rem ##------------------------------------------------
-rem ##--- “ü—Íİ’è ---
+rem ##--- å…¥åŠ›è¨­å®š ---
 set BINDIR=%BASEDIR%bin\
 set SETDIR=%BASEDIR%setting\
 set JL_DIR=%BASEDIR%JL\
 set LG_DIR=%BASEDIR%logo\
 
 rem ##------------------------------------------------
-rem ## “®ìƒpƒ‰ƒ[ƒ^İ’è
+rem ## å‹•ä½œãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š
 rem ##------------------------------------------------
 set LOGO_PATH=%LG_DIR%
 set OPT_CHAPTER_EXE=-s 8 -e 4
-set JLOGO_CMD=JL_•W€.txt
+set JLOGO_CMD=JL_æ¨™æº–.txt
 
 rem ##------------------------------------------------
-rem ## “®ìİ’è‚Ég—p‚·‚éƒtƒ@ƒCƒ‹–¼
+rem ## å‹•ä½œè¨­å®šã«ä½¿ç”¨ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å
 rem ##------------------------------------------------
-rem ##--- “ü—Íƒf[ƒ^ ---
+rem ##--- å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ ---
 set file_csv_chlist=ChList.csv
 set file_csv_param1=JLparam_set1.csv
 set file_csv_param2=JLparam_set2.csv
 
-rem ##--- ƒpƒ‰ƒ[ƒ^İ’è—piV‹Kì¬ƒtƒ@ƒCƒ‹j ---
+rem ##--- ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®šç”¨ï¼ˆæ–°è¦ä½œæˆãƒ•ã‚¡ã‚¤ãƒ«ï¼‰ ---
 set file_bat_param=obs_param.bat
 
 rem ##------------------------------------------------
-rem ## ì¬ƒtƒ@ƒCƒ‹–¼İ’è
+rem ## ä½œæˆãƒ•ã‚¡ã‚¤ãƒ«åè¨­å®š
 rem ##------------------------------------------------
-rem ##--- ì¬ƒtƒ@ƒCƒ‹–¼ ---
+rem ##--- ä½œæˆãƒ•ã‚¡ã‚¤ãƒ«å ---
 set file_avs_in=in_org.avs
 set file_txt_cpt_org=obs_chapter_org.chapter.txt
 set file_txt_cpt_cut=obs_chapter_cut.chapter.txt
 set file_txt_cpt_tvt=obs_chapter_tvtplay.chapter
 
-rem ##--- ƒtƒ@ƒCƒ‹–¼İ’è ---
+rem ##--- ãƒ•ã‚¡ã‚¤ãƒ«åè¨­å®š ---
 set file_avs_logo=obs_logo_erase.avs
 set file_avs_cut=obs_cut.avs
 set file_avs_in_cutcm=in_cutcm.avs

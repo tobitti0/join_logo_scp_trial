@@ -2,11 +2,11 @@
 setlocal
 
 rem ##
-rem ## join_logo_scp����m�F�p�o�b�`�t�@�C���̎蓮�C����ĊJ�p
-rem ## �t�@�C��������擾�����p�����[�^����C��������̍ĊJ
+rem ## join_logo_scp動作確認用バッチファイルの手動修正後再開用
+rem ## ファイル名から取得したパラメータを手修正した後の再開
 rem ##
 
-rem ## �P�K�w��̃t�H���_�擾
+rem ## １階層上のフォルダ取得
 set TMPPATH=%~dp0
 for /F "usebackq delims=" %%I IN (`echo "%TMPPATH:~0,-1%"`) do set TMPPATH=%%~dpI
 

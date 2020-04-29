@@ -49,7 +49,8 @@ const { INPUT_AVS } = require("./settings");
 const createAvs = filename => {
   fs.writeFileSync(
     INPUT_AVS,
-    `FFIndex("${filename}")
+    `LoadPlugin("/usr/local/lib/libffms2.so")
+FFIndex("${filename}")
 FFMpegSource2("${filename}", atrack=-1)`
   );
   return INPUT_AVS;

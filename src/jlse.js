@@ -50,9 +50,10 @@ FFMpegSource2("${filename}", atrack=-1)`
 
 const main = () => {
   const inputFile = argv.input;
+  const inputFileName = path.basename(inputFile, path.extname(inputFile));
   const ffmpegOutputFile = argv.filter;
   const avsOutputFile = argv.avs;
-  const settings = require("./settings").init(inputFile);  //settings init
+  const settings = require("./settings").init(inputFileName);  //settings init
   const parseChannel = require("./channel").parse;
   const parseParam = require("./param").parse;
   const logoframe = require("./command/logoframe").exec;

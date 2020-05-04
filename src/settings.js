@@ -16,8 +16,7 @@ exports.LOGO_PATH = path.join(__dirname, "../logo");
 
 OUTPUT_FOLDER_DIR = path.join(__dirname, `../result`);
 
-exports.init = filepath => {
-  const filename = path.basename(filepath, path.extname(filepath));
+exports.init = filename=> {
   const save_dir = path.join(OUTPUT_FOLDER_DIR, filename);
   fs.ensureDirSync(save_dir);
   exports.LOGOFRAME_AVS_OUTPUT = path.join(save_dir,"obs_logo_erase.avs");

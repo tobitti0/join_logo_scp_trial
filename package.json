@@ -19,6 +19,7 @@
   "homepage": "https://github.com/tobitti0/join_logo_scp_trial",
   "dependencies": {
     "csv": "^5.3.2",
+    "fs-extra": "^9.0.0",
     "jaconv": "^1.0.1",
     "uuid": "^3.3.2",
     "yargs": "^15.3.1"

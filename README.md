@@ -1,40 +1,29 @@
-# 概要
-「join_logo_scp動作確認用バッチファイル  by Yobi」を参考に作成させていただきました。
-フォルダ構成や設定ファイル等は「join_logo_scp動作確認用バッチファイル  by Yobi」と同様にしています。
-
-join_logo_scpのCM位置検出機能について動作確認をするスクリプトです。
+# join_logo_scp_trial for nodejs　& linux
+## 概要
+「join_logo_scp動作確認用バッチファイル  by Yobi」を参考に[sogaani氏][1]が作成された[nodejs版][2]の改造です。  
+ファイルの生成先などをオリジナルに近づけています。  
+## 機能
+join_logo_scpのCM位置検出機能について動作確認をするスクリプトです。  
 TSファイルを入力として、
-* CMカットのためのffmpegへのフィルターオプション
-* CMカットしたAVSファイル
+
+* CMカットしたAVSファイル  
 
 を作成します。
 
-# 想定読者
-join_logo_scp, Linux, ffmpeg, docker についての知識を有している方。
+[1]:https://github.com/sogaani
+[2]:https://github.com/sogaani/JoinLogoScp/tree/master/join_logo_scp_trial
 
-# 事前準備
-
-## OS
-Linux上での動作を想定しています。
-
-## その他
-Dockerfileを使って、実行環境を構築できます。
-通常は次のDockerfileを使って環境を構築してください。
-* /docker/normal/Dockerfile
-
-
-vaapiを使ってlogoframeやchpter_exeのデコードを行いたい場合は次のDockerfileを利用できます。
-* /docker/vaapi/Dockerfile
-
-  vaapiを使う場合は、ホスト上でvaapiが利用できるようになっていることと、コンテナ起動時に `--privileged` オプションが必要です。
-
-# 実行方法
-
+## 実行方法
+事前にAviSynth+3.5.XとL-SMASH Sourceは入れてください。
+1. chapter_exe、logoframe、join_logo_scpをbinフォルダに入れてください。
+1. 使用するロゴデータ(*.lgd)をこのフォルダ直下logoフォルダに格納  
+1. 実行
 ```
-npm start -- -i "TSファイル" -f "出力ffmpegフィルター" -a "出力AVS"
+npm start "TSファイル"
 ```
+1. 検出が自動で行われ結果が生成されます。  
 
-例
-```
-npm start -- -i "/mnt/share/hoge.ts" -f "/usr/local/hoge.filter" -a "/usr/local/hoge.avs"
-```
+## 謝辞
+オリジナルの製作者Yobi氏、  
+nodejsに移植をされたsogaani氏、  
+に深く感謝いたします。

@@ -1,5 +1,5 @@
 const csv = require("csv/lib/sync");
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
 
 const { PARAM_LIST_1, PARAM_LIST_2 } = require("./settings");

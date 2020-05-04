@@ -1,6 +1,6 @@
 const spawnSync = require("child_process").spawnSync;
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs-extra");
 
 const {
   LOGOFRAME_COMMAND,

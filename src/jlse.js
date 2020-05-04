@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
 const parseChannel = require("./channel").parse;
 const parseParam = require("./param").parse;

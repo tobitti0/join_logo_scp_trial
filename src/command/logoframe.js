@@ -5,7 +5,8 @@ const fs = require("fs-extra");
 const {
   LOGOFRAME_COMMAND,
   LOGO_PATH,
-  LOGOFRAME_OUTPUT
+  LOGOFRAME_AVS_OUTPUT,
+  LOGOFRAME_TXT_OUTPUT,
 } = require("../settings");
 
 const getLogo = logoName => {
@@ -37,7 +38,7 @@ const selectLogo = channel => {
 };
 
 exports.exec = (param, channel, filename) => {
-  const args = [filename, "-oa", LOGOFRAME_OUTPUT];
+  const args = [filename, "-oa", LOGOFRAME_TXT_OUTPUT, "-o", LOGOFRAME_AVS_OUTPUT];
 
   const logo = selectLogo(channel);
   let logosub = null;

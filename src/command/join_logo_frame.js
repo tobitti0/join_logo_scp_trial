@@ -4,21 +4,22 @@ const path = require("path");
 const {
   JL_DIR,
   JLSCP_COMMAND,
-  LOGOFRAME_OUTPUT,
+  LOGOFRAME_TXT_OUTPUT,
   CHAPTEREXE_OUTPUT,
-  JLSCP_OUTPUT
+  JLSCP_OUTPUT,
+  OUTPUT_AVS_CUT
 } = require("../settings");
 
-exports.exec = (param, outputFile) => {
+exports.exec = param => {
   let args = [
     "-inlogo",
-    LOGOFRAME_OUTPUT,
+    LOGOFRAME_TXT_OUTPUT,
     "-inscp",
     CHAPTEREXE_OUTPUT,
     "-incmd",
     path.join(JL_DIR, param.JLOGO_CMD),
     "-o",
-    outputFile,
+    OUTPUT_AVS_CUT,
     "-oscp",
     JLSCP_OUTPUT,
     "-flags",

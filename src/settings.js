@@ -14,16 +14,19 @@ exports.FFPROBE_COMMAND = "/usr/local/bin/ffprobe";
 exports.JL_DIR = path.join(__dirname, "../JL");
 exports.LOGO_PATH = path.join(__dirname, "../logo");
 
-exports.OUTPUT_FOLDER_PATH = path.join(__dirname, `../result`);
+OUTPUT_FOLDER_DIR = path.join(__dirname, `../result`);
 
 exports.init = filepath => {
   const filename = path.basename(filepath, path.extname(filepath));
-  const save_dir = path.join(OUTPUT_FOLDER_PATH, filename);
+  const save_dir = path.join(OUTPUT_FOLDER_DIR, filename);
   fs.ensureDirSync(save_dir);
-  exports.LOGOFRAME_OUTPUT = path.join(save_dir,"obs_logoframe.txt");
+  exports.LOGOFRAME_AVS_OUTPUT = path.join(save_dir,"obs_logo_erase.avs");
+  exports.OUTPUT_AVS_CUT = path.join(save_dir, "obs_cut.avs");
+  exports.INPUT_AVS = path.join(save_dir, "in_org.avs");
+
+  exports.LOGOFRAME_TXT_OUTPUT = path.join(save_dir,"obs_logoframe.txt");
   exports.CHAPTEREXE_OUTPUT = path.join(save_dir, "obs_chapterexe.txt");
   exports.JLSCP_OUTPUT = path.join(save_dir, "obs_jlscp.txt");
-  exports.INPUT_AVS = path.join(save_dir, "in_org.avs");
   return this;
 };
 

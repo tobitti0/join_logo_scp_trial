@@ -17,10 +17,8 @@ TSファイルを入力として、
 事前にAviSynth+3.5.XとL-SMASH Sourceは入れてください。
 1. chapter_exe、logoframe、join_logo_scpをbinフォルダに入れてください。
 1. 使用するロゴデータ(*.lgd)をこのフォルダ直下logoフォルダに格納  
-1. 実行
-```
-npm start "TSファイル"
-```
+1. 実行  
+  `npm start "TSファイル"`
 1. 検出が自動で行われ結果が生成されます。  
 
 ## 謝辞

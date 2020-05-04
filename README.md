@@ -1,4 +1,4 @@
-# join_logo_scp_trial for nodejs　& linux
+# join_logo_scp_trial for nodejs & linux
 ## 概要
 「join_logo_scp動作確認用バッチファイル  by Yobi」を参考に[sogaani氏][1]が作成された[nodejs版][2]の改造です。  
 ファイルの生成先などをオリジナルに近づけています。  

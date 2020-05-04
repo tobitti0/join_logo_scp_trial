@@ -1,11 +1,5 @@
 const fs = require("fs-extra");
 const path = require("path");
-const parseChannel = require("./channel").parse;
-const parseParam = require("./param").parse;
-const logoframe = require("./command/logoframe").exec;
-const chapterexe = require("./command/chapterexe").exec;
-const joinlogoframe = require("./command/join_logo_frame").exec;
-const createFilter = require("./output/ffmpeg_filter").create;
 
 const argv = require("yargs")
   .option("input", {
@@ -44,29 +38,35 @@ const argv = require("yargs")
   })
   .help().argv;
 
-const { INPUT_AVS } = require("./settings");
-
-const createAvs = filename => {
+const createAvs = (path, filename) => {
   fs.writeFileSync(
-    INPUT_AVS,
+    path,
     `LoadPlugin("/usr/local/lib/libffms2.so")
 FFIndex("${filename}")
 FFMpegSource2("${filename}", atrack=-1)`
   );
-  return INPUT_AVS;
+  return path;
 };
 
 const main = () => {
   const inputFile = argv.input;
   const ffmpegOutputFile = argv.filter;
   const avsOutputFile = argv.avs;
-  const avsFile = createAvs(inputFile);
+  const settings = require("./settings").init(inputFile);  //settings init
+  const parseChannel = require("./channel").parse;
+  const parseParam = require("./param").parse;
+  const logoframe = require("./command/logoframe").exec;
+  const chapterexe = require("./command/chapterexe").exec;
+  const joinlogoframe = require("./command/join_logo_frame").exec;
+  const createFilter = require("./output/ffmpeg_filter").create;
+  const { INPUT_AVS } = settings;
+  const avsFile = createAvs(INPUT_AVS, inputFile);
   const channel = parseChannel(inputFile);
   const param = parseParam(channel, inputFile);
 
   chapterexe(avsFile);
   logoframe(param, channel, avsFile);
-  joinlogoframe(param, avsOutputFile);
+  joinlogoframe(param);
 
   createFilter(inputFile, avsOutputFile, ffmpegOutputFile);
 };

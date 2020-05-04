@@ -1,5 +1,6 @@
 const path = require("path");
 const uuid = require("uuid/v4")();
+const fs = require("fs-extra");
 
 exports.CHANNEL_LIST = path.join(__dirname, "../setting/ChList.csv");
 exports.PARAM_LIST_1 = path.join(__dirname, "../setting/JLparam_set1.csv");
@@ -13,13 +14,17 @@ exports.FFPROBE_COMMAND = "/usr/local/bin/ffprobe";
 exports.JL_DIR = path.join(__dirname, "../JL");
 exports.LOGO_PATH = path.join(__dirname, "../logo");
 
-exports.LOGOFRAME_OUTPUT = path.join(
-  __dirname,
-  `../tmp/obs_${uuid}_logoframe.txt`
-);
-exports.CHAPTEREXE_OUTPUT = path.join(
-  __dirname,
-  `../tmp/obs_${uuid}_chapterexe.txt`
-);
-exports.JLSCP_OUTPUT = path.join(__dirname, `../tmp/obs_${uuid}_jlscp.txt`);
-exports.INPUT_AVS = path.join(__dirname, `../tmp/obs_${uuid}_input.avs`);
+exports.OUTPUT_FOLDER_PATH = path.join(__dirname, `../result`);
+
+exports.init = filepath => {
+  const filename = path.basename(filepath, path.extname(filepath));
+  const save_dir = path.join(OUTPUT_FOLDER_PATH, filename);
+  fs.ensureDirSync(save_dir);
+  exports.LOGOFRAME_OUTPUT = path.join(save_dir,"obs_logoframe.txt");
+  exports.CHAPTEREXE_OUTPUT = path.join(save_dir, "obs_chapterexe.txt");
+  exports.JLSCP_OUTPUT = path.join(save_dir, "obs_jlscp.txt");
+  exports.INPUT_AVS = path.join(save_dir, "in_org.avs");
+  return this;
+};
+
+

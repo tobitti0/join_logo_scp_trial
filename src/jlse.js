@@ -46,7 +46,8 @@ const createAvs = (path, filename) => {
 //FFMpegSource2("${filename}", atrack=-1)`
 `TSFilePath="${filename}"
 LWLibavVideoSource(TSFilePath, repeat=true, dominance=1)
-AudioDub(last,LWLibavAudioSource(TSFilePath))`
+AudioDub(last,LWLibavAudioSource(TSFilePath))
+`
   );
   return path;
 };
@@ -63,8 +64,8 @@ const main = () => {
   const chapterexe = require("./command/chapterexe").exec;
   const joinlogoframe = require("./command/join_logo_frame").exec;
   const createFilter = require("./output/ffmpeg_filter").create;
-  //const createAvs = require("./output/avs").create;
   const { INPUT_AVS, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT } = settings;
+  const createOutAvs = require("./output/avs").create;
   const avsFile = createAvs(INPUT_AVS, inputFile);
   const channel = parseChannel(inputFile);
   const param = parseParam(channel, inputFileName);
@@ -73,8 +74,8 @@ const main = () => {
   logoframe(param, channel, avsFile);
   joinlogoframe(param);
 
-  //createFilter(inputFile, avsOutputFile, ffmpegOutputFile);
   createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT);
+  createOutAvs(avsFile);
 };
 
 main();

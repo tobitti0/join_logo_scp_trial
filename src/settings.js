@@ -28,6 +28,7 @@ exports.init = filename=> {
   exports.JLSCP_OUTPUT = path.join(save_dir, "obs_jlscp.txt");
 
   exports.OBS_PARAM_PATH = path.join(save_dir, "obs_param.txt");
+  exports.OUTPUT_FILTER_CUT = path.join(save_dir, "ffmpeg.filter");
   return this;
 };
 

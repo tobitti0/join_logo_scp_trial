@@ -63,7 +63,8 @@ const main = () => {
   const chapterexe = require("./command/chapterexe").exec;
   const joinlogoframe = require("./command/join_logo_frame").exec;
   const createFilter = require("./output/ffmpeg_filter").create;
-  const { INPUT_AVS } = settings;
+  //const createAvs = require("./output/avs").create;
+  const { INPUT_AVS, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT } = settings;
   const avsFile = createAvs(INPUT_AVS, inputFile);
   const channel = parseChannel(inputFile);
   const param = parseParam(channel, inputFileName);
@@ -72,7 +73,8 @@ const main = () => {
   logoframe(param, channel, avsFile);
   joinlogoframe(param);
 
-  createFilter(inputFile, avsOutputFile, ffmpegOutputFile);
+  //createFilter(inputFile, avsOutputFile, ffmpegOutputFile);
+  createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT);
 };
 
 main();

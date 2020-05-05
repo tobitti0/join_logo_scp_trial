@@ -26,7 +26,7 @@ exports.parse = filepath => {
     }
 
     // 放送局略称       ：ファイル名の先頭、_の後または括弧の後で、略称直後は空白か括弧か"_"（優先度1）
-    regexp = new RegExp(`^${short}| _${short}| [(〔[{〈《｢『【≪]${short}[)〕\\]}〉》｣』】≫ _]`);
+    regexp = new RegExp(`^${short}[_\s]| _${short}| [(〔[{〈《｢『【≪]${short}[)〕\\]}〉》｣』】≫ _]`);
     match = filename.match(regexp);
     if (match) {
       return channel;

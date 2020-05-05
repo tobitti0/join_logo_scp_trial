@@ -24,17 +24,19 @@ const getLogo = logoName => {
 
 const selectLogo = channel => {
   if (!channel) {
-    return null;
-  }
-
-  for (key of ["install", "short", "recognize"]) {
-    const logo = getLogo(channel[key]);
-    if (logo) {
-      return logo;
+    console.log('放送局はファイル名から検出できませんでした');
+  }else{
+    console.log(`放送局：${channel["short"]}`);
+    for (key of ["install", "short", "recognize"]) {
+      const logo = getLogo(channel[key]);
+      if (logo) {
+        return logo;
+      }
     }
+    console.log("放送局のlgd(lgd2)ファイルが見つかりませんでした");
   }
-
-  return null;
+  console.log("ロゴファイルすべてを入力します");
+  return LOGO_PATH;
 };
 
 exports.exec = (param, channel, filename) => {

@@ -63,7 +63,7 @@ const main = () => {
   const { INPUT_AVS } = settings;
   const avsFile = createAvs(INPUT_AVS, inputFile);
   const channel = parseChannel(inputFile);
-  const param = parseParam(channel, inputFile);
+  const param = parseParam(channel, inputFileName);
 
   chapterexe(avsFile);
   logoframe(param, channel, avsFile);

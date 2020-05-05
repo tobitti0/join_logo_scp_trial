@@ -26,6 +26,8 @@ exports.init = filename=> {
   exports.LOGOFRAME_TXT_OUTPUT = path.join(save_dir,"obs_logoframe.txt");
   exports.CHAPTEREXE_OUTPUT = path.join(save_dir, "obs_chapterexe.txt");
   exports.JLSCP_OUTPUT = path.join(save_dir, "obs_jlscp.txt");
+
+  exports.OBS_PARAM_PATH = path.join(save_dir, "obs_param.txt");
   return this;
 };
 

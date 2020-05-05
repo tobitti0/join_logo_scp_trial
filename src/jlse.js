@@ -41,9 +41,12 @@ const argv = require("yargs")
 const createAvs = (path, filename) => {
   fs.writeFileSync(
     path,
-    `LoadPlugin("/usr/local/lib/libffms2.so")
-FFIndex("${filename}")
-FFMpegSource2("${filename}", atrack=-1)`
+//    `LoadPlugin("/usr/local/lib/libffms2.so")
+//FFIndex("${filename}")
+//FFMpegSource2("${filename}", atrack=-1)`
+`TSFilePath="${filename}"
+LWLibavVideoSource(TSFilePath, repeat=true, dominance=1)
+AudioDub(last,LWLibavAudioSource(TSFilePath))`
   );
   return path;
 };

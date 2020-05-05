@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/tobitti0/join_logo_scp_trial",
   "dependencies": {
+    "async": "^3.2.0",
     "csv": "^5.3.2",
     "fs-extra": "^9.0.0",
     "jaconv": "^1.0.1",

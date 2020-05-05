@@ -9,17 +9,13 @@ const argv = require("yargs")
   })
   .option("filter", {
     alias: "f",
-    type: "string",
-    describe: "path to ffmpeg filter output"
-  })
-  .option("avs", {
-    alias: "a",
-    type: "string",
-    describe: "path to avs output"
+    type: "boolean",
+    default: false,
+    describe: "enable to ffmpeg filter output"
   })
   .demandOption(
-    ["input", "filter", "avs"],
-    "Please provide input, filter and avs arguments to work with this tool"
+    ["input"],
+    "Please provide input arguments to work with this tool"
   )
   .check(function(argv) {
     const ext = path.extname(argv.input);
@@ -53,10 +49,8 @@ AudioDub(last,LWLibavAudioSource(TSFilePath))
 };
 
 const main = () => {
-  const inputFile = argv.input;
+  const inputFile =  path.resolve(argv.input);
   const inputFileName = path.basename(inputFile, path.extname(inputFile));
-  const ffmpegOutputFile = argv.filter;
-  const avsOutputFile = argv.avs;
   const settings = require("./settings").init(inputFileName);  //settings init
   const parseChannel = require("./channel").parse;
   const parseParam = require("./param").parse;
@@ -64,8 +58,11 @@ const main = () => {
   const chapterexe = require("./command/chapterexe").exec;
   const joinlogoframe = require("./command/join_logo_frame").exec;
   const createFilter = require("./output/ffmpeg_filter").create;
-  const { INPUT_AVS, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT } = settings;
   const createOutAvs = require("./output/avs").create;
+  const { INPUT_AVS, 
+          OUTPUT_AVS_CUT, 
+          OUTPUT_FILTER_CUT, 
+        } = settings;
   const avsFile = createAvs(INPUT_AVS, inputFile);
   const channel = parseChannel(inputFile);
   const param = parseParam(channel, inputFileName);
@@ -74,8 +71,10 @@ const main = () => {
   logoframe(param, channel, avsFile);
   joinlogoframe(param);
 
-  createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT);
   createOutAvs(avsFile);
+  if(argv.filter) {
+    createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT);
+  }
 };
 
 main();

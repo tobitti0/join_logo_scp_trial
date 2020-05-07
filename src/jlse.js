@@ -42,7 +42,7 @@ const createAvs = (path, filename) => {
 //FFMpegSource2("${filename}", atrack=-1)`
 `TSFilePath="${filename}"
 LWLibavVideoSource(TSFilePath, repeat=true, dominance=1)
-AudioDub(last,LWLibavAudioSource(TSFilePath))
+AudioDub(last,LWLibavAudioSource(TSFilePath, stream_index=1, av_sync=true))
 `
   );
   return path;

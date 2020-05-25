@@ -13,6 +13,30 @@ const argv = require("yargs")
     default: false,
     describe: "enable to ffmpeg filter output"
   })
+  .option("encode", {
+    alias: "e",
+    type: "boolean",
+    default: false,
+    describe: "enable to ffmpeg encode"
+  })
+  .option("target", {
+    alias: "t",
+    choices: ["cutcm", "cutcm_logo"],
+    default: "cutcm_logo",
+    describe: "select encord target"
+  })
+  .option("option", {
+    alias: "o",
+    type: "string",
+    default: "",
+    describe: "set ffmpeg option"
+  })
+  .option("name", {
+    alias: "n",
+    type: "string",
+    default: "",
+    describe: "set encordet file name"
+  })
   .demandOption(
     ["input"],
     "Please provide input arguments to work with this tool"
@@ -51,6 +75,7 @@ AudioDub(last,LWLibavAudioSource(TSFilePath, stream_index=1, av_sync=true))
 const main = async () => {
   const inputFile =  path.resolve(argv.input);
   const inputFileName = path.basename(inputFile, path.extname(inputFile));
+  const inputFileDir = path.dirname(inputFile);
   const settings = require("./settings").init(inputFileName);  //settings init
   const parseChannel = require("./channel").parse;
   const parseParam = require("./param").parse;
@@ -59,9 +84,11 @@ const main = async () => {
   const joinlogoframe = require("./command/join_logo_frame").exec;
   const createFilter = require("./output/ffmpeg_filter").create;
   const createOutAvs = require("./output/avs").create;
+  const encode = require("./command/ffmpeg").exec;
   const { INPUT_AVS, 
           OUTPUT_AVS_CUT, 
           OUTPUT_FILTER_CUT, 
+          SAVE_DIR
         } = settings;
   const avsFile = createAvs(INPUT_AVS, inputFile);
   const channel = parseChannel(inputFile);
@@ -74,6 +101,9 @@ const main = async () => {
   await createOutAvs(avsFile);
 
   if(argv.filter) {createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT); }
+
+  if(argv.encode) {
+    encode(inputFileDir, argv.name? argv.name : inputFileName, argv.target, argv.option);
   }
 };
 

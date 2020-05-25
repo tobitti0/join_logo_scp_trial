@@ -10,6 +10,7 @@ exports.LOGOFRAME_COMMAND = path.join(__dirname, "../bin/logoframe");
 exports.CHAPTEREXE_COMMAND = path.join(__dirname, "../bin/chapter_exe");
 exports.JLSCP_COMMAND = path.join(__dirname, "../bin/join_logo_scp");
 exports.FFPROBE_COMMAND = "/usr/local/bin/ffprobe";
+exports.FFMPEG_COMMAND = "/usr/local/bin/ffmpeg";
 
 exports.JL_DIR = path.join(__dirname, "../JL");
 exports.LOGO_PATH = path.join(__dirname, "../logo");
@@ -18,6 +19,7 @@ OUTPUT_FOLDER_DIR = path.join(__dirname, `../result`);
 
 exports.init = filename=> {
   const save_dir = path.join(OUTPUT_FOLDER_DIR, filename);
+  exports.SAVE_DIR = save_dir;
   fs.ensureDirSync(save_dir);
   exports.INPUT_AVS = path.join(save_dir, "in_org.avs");
 

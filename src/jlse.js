@@ -48,7 +48,7 @@ AudioDub(last,LWLibavAudioSource(TSFilePath, stream_index=1, av_sync=true))
   return path;
 };
 
-const main = () => {
+const main = async () => {
   const inputFile =  path.resolve(argv.input);
   const inputFileName = path.basename(inputFile, path.extname(inputFile));
   const settings = require("./settings").init(inputFileName);  //settings init
@@ -71,9 +71,9 @@ const main = () => {
   logoframe(param, channel, avsFile);
   joinlogoframe(param);
 
-  createOutAvs(avsFile);
-  if(argv.filter) {
-    createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT);
+  await createOutAvs(avsFile);
+
+  if(argv.filter) {createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT); }
   }
 };
 

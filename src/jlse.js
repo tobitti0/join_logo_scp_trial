@@ -37,6 +37,12 @@ const argv = require("yargs")
     default: "",
     describe: "set encordet file name"
   })
+  .option("remove", {
+    alias: "r",
+    type: "boolean",
+    default: false,
+    describe: "remove avs files"
+  })
   .demandOption(
     ["input"],
     "Please provide input arguments to work with this tool"
@@ -61,7 +67,7 @@ const argv = require("yargs")
 const createAvs = (path, filename) => {
   fs.writeFileSync(
     path,
-//    `LoadPlugin("/usr/local/lib/libffms2.so")
+//`LoadPlugin("/usr/local/lib/libffms2.so")
 //FFIndex("${filename}")
 //FFMpegSource2("${filename}", atrack=-1)`
 `TSFilePath="${filename}"
@@ -104,6 +110,10 @@ const main = async () => {
 
   if(argv.encode) {
     encode(inputFileDir, argv.name? argv.name : inputFileName, argv.target, argv.option);
+  }
+  if(argv.remove) {
+    fs.removeSync(SAVE_DIR);
+    fs.removeSync(path.join(inputFileDir,`${inputFileName}.ts.lwi`));
   }
 };
 

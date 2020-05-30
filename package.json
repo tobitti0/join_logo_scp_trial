@@ -7,6 +7,9 @@
     "start": "node src/jlse.js",
     "lint": "eslint --fix ."
   },
+  "bin": {
+    "jlse": "src/jlse.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tobitti0/join_logo_scp_trial.git"

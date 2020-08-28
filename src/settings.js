@@ -8,6 +8,7 @@ exports.PARAM_LIST_2 = path.join(__dirname, "../setting/JLparam_set2.csv");
 
 exports.LOGOFRAME_COMMAND = path.join(__dirname, "../bin/logoframe");
 exports.CHAPTEREXE_COMMAND = path.join(__dirname, "../bin/chapter_exe");
+exports.TSDIVIDER_COMMAND = path.join(__dirname, "../bin/tsdivider");
 exports.JLSCP_COMMAND = path.join(__dirname, "../bin/join_logo_scp");
 exports.FFPROBE_COMMAND = "/usr/local/bin/ffprobe";
 exports.FFMPEG_COMMAND = "/usr/local/bin/ffmpeg";
@@ -22,6 +23,7 @@ exports.init = filename=> {
   exports.SAVE_DIR = save_dir;
   fs.ensureDirSync(save_dir);
   exports.INPUT_AVS = path.join(save_dir, "in_org.avs");
+  exports.TSDIVIDER_OUTPUT = path.join(save_dir, `${filename}_split.ts`);
 
   exports.CHAPTEREXE_OUTPUT = path.join(save_dir, "obs_chapterexe.txt");
 

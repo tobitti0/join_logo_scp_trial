@@ -65,7 +65,7 @@ const argv = require("yargs")
   })
   .help().argv;
 
-const createAvs = (path, filename) => {
+const createAvs = (path, filename, index) => {
   fs.writeFileSync(
     path,
 //`LoadPlugin("/usr/local/lib/libffms2.so")
@@ -73,7 +73,7 @@ const createAvs = (path, filename) => {
 //FFMpegSource2("${filename}", atrack=-1)`
 `TSFilePath="${filename}"
 LWLibavVideoSource(TSFilePath, repeat=true, dominance=1)
-AudioDub(last,LWLibavAudioSource(TSFilePath, stream_index=1, av_sync=true))
+AudioDub(last,LWLibavAudioSource(TSFilePath, stream_index=${index}, av_sync=true))
 `
   );
   return path;
@@ -88,6 +88,7 @@ const main = async () => {
   const parseParam = require("./param").parse;
   const logoframe = require("./command/logoframe").exec;
   const chapterexe = require("./command/chapterexe").exec;
+  const tsdivider = require("./command/tsdivider").exec;
   const joinlogoframe = require("./command/join_logo_frame").exec;
   const createFilter = require("./output/ffmpeg_filter").create;
   const createOutAvs = require("./output/avs").create;
@@ -95,11 +96,18 @@ const main = async () => {
   const { INPUT_AVS, 
           OUTPUT_AVS_CUT, 
           OUTPUT_FILTER_CUT, 
-          SAVE_DIR
+          SAVE_DIR,
+          TSDIVIDER_OUTPUT
         } = settings;
-  const avsFile = createAvs(INPUT_AVS, inputFile);
   const channel = parseChannel(inputFile);
   const param = parseParam(channel, inputFileName);
+  let avsFile = createAvs(INPUT_AVS, inputFile, 1);
+  if(param.use_tssplit == 1){
+    console.log("TS spliting ...");
+    tsdivider(inputFile);
+    console.log("TS split done");
+    avsFile = createAvs(INPUT_AVS, TSDIVIDER_OUTPUT, -1);
+  };
 
   chapterexe(avsFile);
   logoframe(param, channel, avsFile);

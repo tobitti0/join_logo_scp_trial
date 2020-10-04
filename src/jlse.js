@@ -32,7 +32,13 @@ const argv = require("yargs")
     default: "",
     describe: "set ffmpeg option"
   })
-  .option("name", {
+  .option("outdir", {
+    alias: "d",
+    type: "string",
+    default: "",
+    describe: "set encorded file dir"
+  })
+  .option("outname", {
     alias: "n",
     type: "string",
     default: "",
@@ -118,7 +124,7 @@ const main = async () => {
   if(argv.filter) {createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT); }
 
   if(argv.encode) {
-    encode(inputFileDir, argv.name? argv.name : inputFileName, argv.target, argv.option);
+    encode(argv.outdir? argv.outdir : inputFileDir, argv.outname? argv.outname : inputFileName, argv.target, argv.option);
   }
   if(argv.remove) {
     fs.removeSync(SAVE_DIR);

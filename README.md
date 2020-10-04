@@ -22,6 +22,8 @@ TSファイルを入力として、
 ## 実行方法
 事前にAviSynth+3.5.XとL-SMASH Sourceは入れてください。
 1. chapter_exe、logoframe、join_logo_scpをbinフォルダに入れてください。
+1. `npm install`と`npm link`を実行
+1. `jlse --help`が動作するかを確認
 1. 使用するロゴデータ(\*.lgd)をこのフォルダ直下logoフォルダに格納  
 1. 実行  
   `npm start -- -i "TSファイル"`
@@ -44,8 +46,8 @@ TSファイルは相対パスで指定しても一応絶対パスに変換しま
 [4]:https://github.com/tobitti0/delogo-AviSynthPlus-Linux
 
 (true or false 指定はしなくてもオプションを付けるだけでtrueとなります。)  
-例（ffmpegフィルタ生成時）：`npm start -- -i "/tmp/test/局名_タイトル 話数.ts" -f`  
-例（エンコードし、解析結果などを消す場合）：`npm start -- -i "/tmp/test/局名_タイトル 話数.ts" -e -t cutcm -o " -c:v libx264 -vf bwdif=1 -preset medium -crf 23 -aspect 16:9" -r`  
+例（ffmpegフィルタ生成時）：`jlse -i "/tmp/test/局名_タイトル 話数.ts" -f`  
+例（エンコードし、解析結果などを消す場合）：`jlse -i "/tmp/test/局名_タイトル 話数.ts" -e -t cutcm -o " -c:v libx264 -vf bwdif=1 -preset medium -crf 23 -aspect 16:9" -r`  
 
 ## 生成されるもの
 | ファイル名| 内容 |

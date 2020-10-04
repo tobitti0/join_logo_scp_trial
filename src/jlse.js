@@ -36,7 +36,7 @@ const argv = require("yargs")
     alias: "n",
     type: "string",
     default: "",
-    describe: "set encordet file name"
+    describe: "set encorded file name"
   })
   .option("remove", {
     alias: "r",

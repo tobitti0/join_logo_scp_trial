@@ -37,6 +37,10 @@ exports.init = filename=> {
   exports.OUTPUT_AVS_IN_CUT = path.join(save_dir, "in_cutcm.avs");
   exports.OUTPUT_AVS_IN_CUT_LOGO = path.join(save_dir, "in_cutcm_logo.avs");
   exports.OUTPUT_FILTER_CUT = path.join(save_dir, "ffmpeg.filter");
+
+  exports.FILE_TXT_CPT_ORG = path.join(save_dir, "obs_chapter_org.chapter.txt");
+  exports.FILE_TXT_CPT_CUT = path.join(save_dir, "obs_chapter_cut.chapter.txt");
+  exports.FILE_TXT_CPT_TVT = path.join(save_dir, "obs_chapter_tvtplay.chapter");
   return this;
 };
 

@@ -98,6 +98,7 @@ const main = async () => {
   const joinlogoframe = require("./command/join_logo_frame").exec;
   const createFilter = require("./output/ffmpeg_filter").create;
   const createOutAvs = require("./output/avs").create;
+  const createChapter = require("./output/chapter_jls").create;
   const encode = require("./command/ffmpeg").exec;
   const { INPUT_AVS, 
           OUTPUT_AVS_CUT, 
@@ -120,6 +121,7 @@ const main = async () => {
   joinlogoframe(param);
 
   await createOutAvs(avsFile);
+  await createChapter(settings);
 
   if(argv.filter) {createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT); }
 

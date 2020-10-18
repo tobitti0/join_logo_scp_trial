@@ -280,8 +280,8 @@ function OutputData(ChapterData, nCutType, file){
         //--- tvtplay用 ---
         if((nCutType == MODE_TVT) || (nCutType == MODE_TVC)){
           //--- CHAPTER名を設定 ---
-          if(nCutType == MODE_TVC){
-            if ((bCutState > 0) && (ChapterData.m_bCutOn[i] == 0)){
+          if(nCutType == MODE_TVC){   // カット済み
+            if ((bCutState > 0) && (ChapterData.m_bCutOn[i] == 0)){   // カット終了
               strName = ChapterData.m_strName[i] + SUFFIX_CUTO;
             }else{
               strName = ChapterData.m_strName[i];
@@ -298,9 +298,9 @@ function OutputData(ChapterData, nCutType, file){
           m_strOutput = m_strOutput + nSumTime + 'c' + strName + '-';
         }else{          //--- 通常のchapter用 ---
           //--- CHAPTER名を設定 ---
-          if ((bCutState == 0 ) && (ChapterData.m_bCutOn[i]>0)){
+          if ((bCutState == 0 ) && (ChapterData.m_bCutOn[i]>0)){    // カット開始
             strName = PREFIX_ORGI + ChapterData.m_strName[i];
-          }else if ((bCutState > 0) && (ChapterData.m_bCutOn[i] == 0)){
+          }else if ((bCutState > 0) && (ChapterData.m_bCutOn[i] == 0)){   // カット終了
             if (nCutType == MODE_CUT){
               strName = PREFIX_CUTO + ChapterData.m_strName[i] + SUFFIX_CUTO;
             }else{
@@ -322,7 +322,7 @@ function OutputData(ChapterData, nCutType, file){
   }
   //--- tvtplay用最終文字列 ---
   if (nCutType == MODE_TVT){
-    if (bCutState > 0){
+    if (bCutState > 0){   // CM終了処理
       m_strOutput = m_strOutput + "0e" + PREFIX_TVTO + "-";
     }else{
       m_strOutput = m_strOutput + "0e-";
@@ -332,6 +332,7 @@ function OutputData(ChapterData, nCutType, file){
     m_strOutput = m_strOutput + "c";
   }
   //console.log(m_strOutput);
+  //--- 結果出力 ---
   fs.writeFile(file, m_strOutput, (err, data) => {
     if(err) console.log(err);
   });

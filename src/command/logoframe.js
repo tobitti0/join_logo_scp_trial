@@ -1,4 +1,4 @@
-const spawnSync = require("child_process").spawnSync;
+const childProcess = require('child_process');
 const path = require("path");
 const fs = require("fs-extra");
 
@@ -40,31 +40,34 @@ const selectLogo = channel => {
 };
 
 exports.exec = (param, channel, filename) => {
-  const args = [filename, "-oa", LOGOFRAME_TXT_OUTPUT, "-o", LOGOFRAME_AVS_OUTPUT];
+  return new Promise((resolve)=>{
+    const args = [filename, "-oa", LOGOFRAME_TXT_OUTPUT, "-o", LOGOFRAME_AVS_OUTPUT];
+    const logo = selectLogo(channel);
+    let logosub = null;
+    if (param.LOGOSUBHEAD) {
+      logosub = getLogo(param.LOGOSUBHEAD);
+    }
 
-  const logo = selectLogo(channel);
-  let logosub = null;
-  if (param.LOGOSUBHEAD) {
-    logosub = getLogo(param.LOGOSUBHEAD);
-  }
+    if (!logosub && !logo) {
+      return;
+    }
 
-  if (!logosub && !logo) {
-    return;
-  }
+    if (logo) {
+      args.push("-logo");
+      args.push(logo);
+    }
 
-  if (logo) {
-    args.push("-logo");
-    args.push(logo);
-  }
+    if (logosub) {
+      args.push("-logo99");
+      args.push(logosub);
+    }
 
-  if (logosub) {
-    args.push("-logo99");
-    args.push(logosub);
-  }
-  try {
-    spawnSync(LOGOFRAME_COMMAND, args, { stdio: "inherit" });
-  } catch (e) {
-    console.error(e);
-    process.exit(-1);
-  }
+    const child = childProcess.spawn(LOGOFRAME_COMMAND, args);
+    child.on('exit', (code)=>{
+      resolve();
+    });
+    child.stderr.on('data', (data)=>{
+      console.error("logoframe " + data);
+    });
+  })
 };

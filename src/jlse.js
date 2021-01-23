@@ -116,9 +116,9 @@ const main = async () => {
     avsFile = createAvs(INPUT_AVS, TSDIVIDER_OUTPUT, -1);
   };
 
-  chapterexe(avsFile);
-  logoframe(param, channel, avsFile);
-  joinlogoframe(param);
+  await chapterexe(avsFile);
+  await logoframe(param, channel, avsFile);
+  await joinlogoframe(param);
 
   await createOutAvs(avsFile);
   await createChapter(settings);

@@ -541,14 +541,7 @@ function GetDispChapter(num, nCount, nTime, strName){
 // strName : chapter名
 //------------------------------------------------------------
 function GetDispChapterFrame(num, nCount, frame, strName){
-  let strCount;
-
-  //--- チャプター番号 ---
-  strCount = String(nCount);
-  if (strCount.length == 1){
-    strCount = '0' + strCount;
-  }
   //--- 出力文字列 ---
-  var dictBuf = {id : nCount, name : strName, frame : frame}
+  var dictBuf = {id : nCount-1, name : strName, frame : frame}
   return (dictBuf);
 }

@@ -27,8 +27,12 @@ exports.create = async (inputFile) => {
           OUTPUT_AVS_IN_CUT_LOGO 
         } = require("../settings");
   try {
-    await createfile([inputFile, OUTPUT_AVS_CUT], OUTPUT_AVS_IN_CUT);
-    await createfile([inputFile, LOGOFRAME_AVS_OUTPUT, OUTPUT_AVS_CUT], OUTPUT_AVS_IN_CUT_LOGO);
+    if(fs.existsSync(OUTPUT_AVS_CUT)){
+      await createfile([inputFile, OUTPUT_AVS_CUT], OUTPUT_AVS_IN_CUT);
+    }
+    if(fs.existsSync(LOGOFRAME_AVS_OUTPUT) && fs.existsSync(OUTPUT_AVS_CUT)){
+      await createfile([inputFile, LOGOFRAME_AVS_OUTPUT, OUTPUT_AVS_CUT], OUTPUT_AVS_IN_CUT_LOGO);
+    }
   } catch (e) {
     console.error(e);
     process.exit(-1);

@@ -37,7 +37,7 @@ exports.create = (tsFile, trimFile, outputFile) => {
     }
     filterString += `${concatString}concat=n=${
       trimFrames.length
-    }:v=1:a=1[video][audio];`;
+    }:v=1:a=1[video][audio]`;
 
     fs.writeFileSync(outputFile, filterString);
   } catch (e) {

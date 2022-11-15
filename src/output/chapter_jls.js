@@ -247,7 +247,8 @@ function OutputData(ChapterData, nCutType, file){
   let bSkip;
   let strName;
 
-  let nSumTime = 0; // 現在の位置（ミリ秒単位）
+  let nSumTime = 0;            // 現在の位置（ミリ秒単位）
+  let nSumFrame = 0;           // 現在の位置（フレーム）
   let nCount    = 1            // CHAPTER出力番号
   let bCutState = 0            // 前回の状態（0:非カット用 1:カット用）
   let m_strOutput = ""         // 出力
@@ -280,7 +281,8 @@ function OutputData(ChapterData, nCutType, file){
         if ((nCutType == MODE_ORG) || (nCutType == MODE_ORG_FRAME) || (nCutType == MODE_TVT)){
           if ((i == 0) && (ChapterData.m_nMSec[i] > 0)){
             if(nCutType == MODE_ORG_FRAME){
-              nSumTime = nSumTime + ChapterData.m_nFrame[i];
+              nSumTime = nSumTime + ChapterData.m_nMSec[i];
+              nSumFrame = nSumFrame + ChapterData.m_nFrame[i];
             }else{
               nSumTime = nSumTime + ChapterData.m_nMSec[i];
             }
@@ -320,14 +322,15 @@ function OutputData(ChapterData, nCutType, file){
           }
           //--- CHAPTER出力文字列設定 ---
           if(nCutType == MODE_ORG_FRAME){
-            m_jsonOutput.push(GetDispChapterFrame(i, nCount, nSumTime, strName));
+            m_jsonOutput.push(GetDispChapterFrame(i, nCount, nSumTime, nSumFrame, strName));
           }else{
             m_strOutput += GetDispChapter(i, nCount, nSumTime, strName);
           }
         }
         //--- 書き込み後共通設定 ---
         if(nCutType == MODE_ORG_FRAME){
-          nSumTime  = nSumTime + (ChapterData.m_nFrame[inext] - ChapterData.m_nFrame[i]);
+          nSumFrame  = nSumFrame + (ChapterData.m_nFrame[inext] - ChapterData.m_nFrame[i]);
+          nSumTime  = nSumTime + (ChapterData.m_nMSec[inext] - ChapterData.m_nMSec[i]);
         }else{
           nSumTime  = nSumTime + (ChapterData.m_nMSec[inext] - ChapterData.m_nMSec[i]);
         }
@@ -540,8 +543,14 @@ function GetDispChapter(num, nCount, nTime, strName){
 // nTime   : 位置ミリ秒単位
 // strName : chapter名
 //------------------------------------------------------------
-function GetDispChapterFrame(num, nCount, frame, strName){
+function GetDispChapterFrame(num, nCount, nTime, frame, strName){
+  let nHour, nMin, nSec, nMsec;
+  nHour = parseInt(nTime / (60*60*1000));
+  nMin  = parseInt((nTime % (60*60*1000)) / (60*1000));
+  nSec  = parseInt((nTime % (60*1000)) / 1000);
+  nMsec = nTime % 1000;
+  sec = nHour * 3600 + nMin * 60 + nSec
   //--- 出力文字列 ---
-  var dictBuf = {id : nCount-1, name : strName, frame : frame}
+  var dictBuf = {id : nCount-1, name : strName, frame : frame, sec : sec, msec : nMsec}
   return (dictBuf);
 }

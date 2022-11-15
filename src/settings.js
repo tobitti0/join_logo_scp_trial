@@ -41,6 +41,7 @@ exports.init = filename=> {
   exports.FILE_TXT_CPT_ORG = path.join(save_dir, "obs_chapter_org.chapter.txt");
   exports.FILE_TXT_CPT_CUT = path.join(save_dir, "obs_chapter_cut.chapter.txt");
   exports.FILE_TXT_CPT_TVT = path.join(save_dir, "obs_chapter_tvtplay.chapter");
+  exports.FILE_TXT_CPT_FRAME = path.join(save_dir, "obs_chapter_org_frame.chapter.txt");
   return this;
 };
 

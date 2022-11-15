@@ -6,7 +6,8 @@ exports.create = async (settings) => {
           JLSCP_OUTPUT,
           FILE_TXT_CPT_ORG,
           FILE_TXT_CPT_CUT,
-          FILE_TXT_CPT_TVT
+          FILE_TXT_CPT_TVT,
+          FILE_TXT_CPT_FRAME
         } = settings;
   try {
     //前提ファイルの有無確認
@@ -17,11 +18,12 @@ exports.create = async (settings) => {
     let nItemTrim = await TrimReader(OUTPUT_AVS_CUT);
     // Chapterデータをobs_jlscpから生成する
     let ChapterData = await CreateChapter(nItemTrim, JLSCP_OUTPUT);
-    //console.log(ChapterData);
+    // console.log(ChapterData);
     // Chapterデータからファイルを出力する
     OutputData(ChapterData, 0, FILE_TXT_CPT_ORG);
     OutputData(ChapterData, 1, FILE_TXT_CPT_CUT);
     OutputData(ChapterData, 2, FILE_TXT_CPT_TVT);
+    OutputData(ChapterData, 4, FILE_TXT_CPT_FRAME);
   } catch (e) {
     console.error(e);
     process.exit(-1);
@@ -74,6 +76,7 @@ function CreateChapter(trim, file){
   //--- CHAPTER情報格納用変数 ---
   var ChapterData = {
                   m_nMSec:[],
+                  m_nFrame:[],
                   m_bCutOn:[],
                   m_strName:[]
                 };
@@ -221,7 +224,7 @@ function CreateChapter(trim, file){
 // CHAPTER情報をファイルに出力
 //  (input)
 //    ChapterDate:チャプターデータ
-//    nCutType : 1)MODE_ORG / 2)MODE_CUT / 3)MODE_TVT / 4)MODE_TVC
+//    nCutType : 0)MODE_ORG / 1)MODE_CUT / 2)MODE_TVT / 3)MODE_TVC / 4)MODE_ORG_FRAME
 //    file:出力先
 //---------------------------------------------
 function OutputData(ChapterData, nCutType, file){
@@ -237,6 +240,7 @@ function OutputData(ChapterData, nCutType, file){
   const MODE_CUT = 1
   const MODE_TVT = 2
   const MODE_TVC = 3
+  const MODE_ORG_FRAME = 4
   
   const MSEC_DIVMIN = 100      //チャプター位置を同一としない時間間隔（msec単位）
   let i, inext;
@@ -247,6 +251,7 @@ function OutputData(ChapterData, nCutType, file){
   let nCount    = 1            // CHAPTER出力番号
   let bCutState = 0            // 前回の状態（0:非カット用 1:カット用）
   let m_strOutput = ""         // 出力
+  let m_jsonOutput = []        // 出力
   //--- tvtplay用初期文字列 ---
   if (nCutType == MODE_TVT || nCutType == MODE_TVC){
     m_strOutput = "c-";
@@ -270,11 +275,15 @@ function OutputData(ChapterData, nCutType, file){
     }
     if (bSkip == 0){
       //--- 全部表示モードorカットしない位置の時に出力 ---
-      if ((nCutType == MODE_ORG) || (nCutType == MODE_TVT) || (ChapterData.m_bCutOn[i] == 0)){
+      if ((nCutType == MODE_ORG) || (nCutType == MODE_ORG_FRAME) || (nCutType == MODE_TVT) || (ChapterData.m_bCutOn[i] == 0)){
         //--- 最初が0でない時の補正 ---
-        if ((nCutType == MODE_ORG) || (nCutType == MODE_TVT)){
+        if ((nCutType == MODE_ORG) || (nCutType == MODE_ORG_FRAME) || (nCutType == MODE_TVT)){
           if ((i == 0) && (ChapterData.m_nMSec[i] > 0)){
-            nSumTime = nSumTime + ChapterData.m_nMSec[i];
+            if(nCutType == MODE_ORG_FRAME){
+              nSumTime = nSumTime + ChapterData.m_nFrame[i];
+            }else{
+              nSumTime = nSumTime + ChapterData.m_nMSec[i];
+            }
           }
         }
         //--- tvtplay用 ---
@@ -310,10 +319,18 @@ function OutputData(ChapterData, nCutType, file){
             strName = ChapterData.m_strName[i];
           }
           //--- CHAPTER出力文字列設定 ---
-          m_strOutput += GetDispChapter(i, nCount, nSumTime, strName);
+          if(nCutType == MODE_ORG_FRAME){
+            m_jsonOutput.push(GetDispChapterFrame(i, nCount, nSumTime, strName));
+          }else{
+            m_strOutput += GetDispChapter(i, nCount, nSumTime, strName);
+          }
         }
         //--- 書き込み後共通設定 ---
-        nSumTime  = nSumTime + (ChapterData.m_nMSec[inext] - ChapterData.m_nMSec[i]);
+        if(nCutType == MODE_ORG_FRAME){
+          nSumTime  = nSumTime + (ChapterData.m_nFrame[inext] - ChapterData.m_nFrame[i]);
+        }else{
+          nSumTime  = nSumTime + (ChapterData.m_nMSec[inext] - ChapterData.m_nMSec[i]);
+        }
         nCount    = nCount + 1;
       }
       //--- 現CHAPTERに状態更新 ---
@@ -331,6 +348,12 @@ function OutputData(ChapterData, nCutType, file){
   }else if (nCutType == MODE_TVC){
     m_strOutput = m_strOutput + "c";
   }
+
+  //--- frameOUT用最終処理 ---
+  if (nCutType == MODE_ORG_FRAME){
+    m_strOutput = JSON.stringify(m_jsonOutput, null, 2);
+  }
+
   //console.log(m_strOutput);
   //--- 結果出力 ---
   fs.writeFile(file, m_strOutput, (err, data) => {
@@ -456,8 +479,9 @@ function ProcChapterName(bCutOn, nType, nPart, bPartExist, nSecRd){
 // bCutOn  : 1の時カット
 // strName : chapter表示用文字列
 //---------------------------------------------
-function InsertMSec(chapterdata, nMSec, bCutOn, strName){
+function InsertMSec(chapterdata, nFrame, nMSec, bCutOn, strName){
   chapterdata.m_nMSec.push(nMSec);
+  chapterdata.m_nFrame.push(nFrame);
   chapterdata.m_bCutOn.push(bCutOn);
   chapterdata.m_strName.push(strName);
 }
@@ -471,7 +495,7 @@ function InsertMSec(chapterdata, nMSec, bCutOn, strName){
 function InsertFrame(chapterdata, nFrame, bCutOn, strName){
   //29.97fpsの設定で固定
   var nTmp = parseInt((nFrame*1001 + 30/2)/30);
-  InsertMSec(chapterdata, nTmp, bCutOn, strName);
+  InsertMSec(chapterdata, nFrame, nTmp, bCutOn, strName);
 }
 
 //------------------------------------------------------------
@@ -509,3 +533,22 @@ function GetDispChapter(num, nCount, nTime, strName){
   return (strBuf);
 }
 
+//------------------------------------------------------------
+// CHAPTER表示用文字列を１個分作成（m_strOutputに格納）
+// num     : 格納chapter通し番号
+// nCount  : 出力用chapter番号
+// nTime   : 位置ミリ秒単位
+// strName : chapter名
+//------------------------------------------------------------
+function GetDispChapterFrame(num, nCount, frame, strName){
+  let strCount;
+
+  //--- チャプター番号 ---
+  strCount = String(nCount);
+  if (strCount.length == 1){
+    strCount = '0' + strCount;
+  }
+  //--- 出力文字列 ---
+  var dictBuf = {id : nCount, name : strName, frame : frame}
+  return (dictBuf);
+}

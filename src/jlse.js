@@ -11,6 +11,7 @@ const argv = require("yargs")
   .option("run_command", {
     choices: ["all", "chapter_exe", "logoframe", "join_logo_scp", "ffmpeg"],
     default: "all",
+    type: "array",
     describe: "slect run command"
   })
   .option("filter", {
@@ -121,23 +122,22 @@ const main = async () => {
     avsFile = createAvs(INPUT_AVS, TSDIVIDER_OUTPUT, -1);
   };
 
-  if(argv.run_command == "all" || argv.run_command =="chapter_exe"){
+  if(argv.run_command.includes("all") || argv.run_command.includes("chapter_exe")){
     await chapterexe(avsFile);
   }
 
-  if(argv.run_command == "all" || argv.run_command =="logoframe"){
+  if(argv.run_command.includes("all") || argv.run_command.includes("logoframe")){
     await logoframe(param, channel, avsFile);
   }
 
-  if(argv.run_command == "all" || argv.run_command =="join_logo_scp"){
+  if(argv.run_command.includes("all") || argv.run_command.includes("join_logo_scp")){
     await joinlogoframe(param);
     await createOutAvs(avsFile);
     await createChapter(settings);
     if(argv.filter) {createFilter(inputFile, OUTPUT_AVS_CUT, OUTPUT_FILTER_CUT); }
   }
 
-
-  if(argv.encode && (argv.run_command == "all"|| argv.run_command == "ffmpeg")) {
+  if(argv.encode && (argv.run_command.includes("all") || argv.run_command.includes("ffmpeg"))) {
     encode(argv.outdir? argv.outdir : inputFileDir, argv.outname? argv.outname : inputFileName, argv.target, argv.option);
   }
   if(argv.remove) {
